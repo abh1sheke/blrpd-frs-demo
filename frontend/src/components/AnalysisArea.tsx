@@ -1,13 +1,14 @@
 import { ScrollArea } from "@mantine/core";
 
-export default function AnalysisArea({
-  previews,
-}: {
-  previews: JSX.Element[];
-}) {
+export default function AnalysisArea() {
   return (
     <>
-      <ScrollArea>{previews}</ScrollArea>
+      <div className="app-analysis">
+        <h2>Face analysis</h2>
+        <ScrollArea>
+
+        </ScrollArea>
+      </div>
     </>
   );
 }
