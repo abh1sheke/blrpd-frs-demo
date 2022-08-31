@@ -1,6 +1,5 @@
 import {
   MantineProvider,
-  Title,
   MantineThemeOverride,
   Tuple,
 } from "@mantine/core";
