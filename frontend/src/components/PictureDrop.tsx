@@ -1,11 +1,12 @@
 import { FileInput } from "@mantine/core";
 import { IconUpload } from "@tabler/icons";
 import { FormEvent } from "react";
-import { selectImageState, setImageData } from "../store/sessionSlice";
+import { selectImageState, setImageData, setReturnData } from "../store/sessionSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { ImageData } from "../store/sessionSlice";
 import { useState } from "react";
 import axios from "axios";
+
 
 function FormButton({ imageData }: { imageData?: ImageData }) {
   const base = "mx-auto px-6 py-2 font-roboto rounded transition-all";
@@ -48,10 +49,8 @@ export default function PictureDrop() {
       : console.log("err");
   };
   const handleSubmit = async (e: FormEvent) => {
-    console.log("submitted");
     e.preventDefault();
     let formData = new FormData();
-    console.log(img);
     formData.append("image", img);
     formData.append("filename", imageData?.filename as string);
     axios
@@ -61,9 +60,9 @@ export default function PictureDrop() {
         },
       })
       .then((res) => {
-        console.log(res.data);
+        dispatch(setReturnData(res.data));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert(err));
   };
   return (
     <>
