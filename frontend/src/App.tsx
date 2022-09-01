@@ -1,10 +1,9 @@
-import {
-  MantineProvider,
-  MantineThemeOverride,
-  Tuple,
-} from "@mantine/core";
+import { MantineProvider, MantineThemeOverride, Tuple } from "@mantine/core";
 import { colors } from "./colors";
 import PictureDrop from "./components/PictureDrop";
+import { selectImageState } from "./store/sessionSlice";
+import { useSelector } from "react-redux";
+import AnalysisArea from "./components/AnalysisArea";
 
 type CustomColors = keyof typeof colors;
 declare module "@mantine/core" {
@@ -21,10 +20,11 @@ const mantineColors = Object.fromEntries(
 
 const themeConfig: MantineThemeOverride = {
   colors: mantineColors,
-  colorScheme: 'dark',
+  colorScheme: "dark",
 };
 
 export default function App() {
+  const imageData = useSelector(selectImageState);
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS theme={themeConfig}>
       <div className="app-main bg-zinc-900 h-screen w-screen flex flex-col text-zinc-200 font-roboto overflow-hidden">
@@ -34,9 +34,10 @@ export default function App() {
             Facial Recognition System Demo
           </h1>
         </div>
-        <div className="dropzone-container mt-[30px] px-[300px] py-[px]">
+        <div className="fileinput-container mt-[30px] px-[300px] py-[px]">
           <PictureDrop />
         </div>
+        <div className='mx-auto'>{imageData.returnData ? <AnalysisArea /> : <></>}</div>
       </div>
     </MantineProvider>
   );
