@@ -1,9 +1,9 @@
 import { MantineProvider, MantineThemeOverride, Tuple } from "@mantine/core";
 import { colors } from "./colors";
-import PictureDrop from "./components/PictureDrop";
 import { selectImageState } from "./store/sessionSlice";
 import { useSelector } from "react-redux";
-import AnalysisArea from "./components/AnalysisArea";
+import AnalysisArea from "./containers/AnalysisArea";
+import Uplaodtabgroup from "./containers/UploadTabgroup.tsx";
 
 type CustomColors = keyof typeof colors;
 declare module "@mantine/core" {
@@ -35,7 +35,7 @@ export default function App() {
           </h1>
         </div>
         <div className="fileinput-container mt-[30px] px-[300px] py-[px]">
-          <PictureDrop />
+          <Uplaodtabgroup />
         </div>
         {imageData.returnData ? <AnalysisArea /> : <></>}
       </div>

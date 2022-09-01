@@ -3,34 +3,9 @@ import { IconUpload } from "@tabler/icons";
 import { FormEvent } from "react";
 import { selectImageState, setImageData, setReturnData } from "../store/sessionSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { ImageData } from "../store/sessionSlice";
 import { useState } from "react";
 import axios from "axios";
-
-
-function FormButton({ imageData }: { imageData?: ImageData }) {
-  const base = "mx-auto px-6 py-2 font-roboto rounded transition-all drop-shadow-md";
-  const enabled =
-    "text-zinc-300 bg-black hover:bg-zinc-700 hover:ring-1 hover:ring-zinc-800 cursor-pointer";
-  const disabled = "text-zinc-300 bg-black opacity-40";
-  return (
-    <>
-      {imageData ? (
-        <>
-          <button className={`${base} ${enabled}`} type="submit">
-            Find match
-          </button>
-        </>
-      ) : (
-        <>
-          <button className={`${base} ${disabled}`} disabled type="submit">
-            Find match
-          </button>
-        </>
-      )}
-    </>
-  );
-}
+import FormButton from "../components/FormButton";
 
 export default function PictureDrop() {
   const [img, setImg] = useState<Blob | string>('');
@@ -66,6 +41,7 @@ export default function PictureDrop() {
   };
   return (
     <>
+    
       <form className="flex flex-col" onSubmit={(e) => handleSubmit(e)}>
         <FileInput
           className="my-5"

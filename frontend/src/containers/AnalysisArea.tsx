@@ -1,12 +1,11 @@
 import { Image, ScrollArea } from "@mantine/core";
 import { selectImageState } from "../store/sessionSlice";
 import { useSelector } from "react-redux";
-import MatchCard from "./MatchCard";
+import MatchCard from "../components/MatchCard";
 
 export default function AnalysisArea() {
   const imageData = useSelector(selectImageState);
   const matches = imageData.returnData?.matches;
-  console.log(matches);
   return (
     <>
       <div className="app-analysis mt-10 text-zinc-300 mx-[100px] rounded bg-zinc-900">
