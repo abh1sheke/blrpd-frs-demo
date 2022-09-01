@@ -9,12 +9,12 @@ export default function AnalysisArea() {
   console.log(matches);
   return (
     <>
-      <div className="app-analysis mt-10 text-zinc-300">
-        <h1 className="text-center font-roboto font-semibold">
+      <div className="app-analysis mt-10 text-zinc-300 mx-[100px] rounded bg-zinc-900">
+        <h1 className="mt-5 mb-2 text-center font-roboto font-semibold">
           Face Analysis Result
         </h1>
         <ScrollArea style={{ height: "530px" }}>
-          <div className="scroll-container flex flex-col justify-between pb-2">
+          <div className="scroll-container flex flex-col justify-between pb-5 p-5">
             <div className="source-section mt-3 mx-auto">
               <Image
                 src={imageData.blob}
@@ -24,6 +24,7 @@ export default function AnalysisArea() {
                 radius="md"
                 alt="upload.jpg"
                 caption={`Source image - ${imageData.filename}`}
+                className='drop-shadow-sm'
               />
             </div>
             <div className="matches-section mt-14 text-center">

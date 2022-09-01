@@ -27,7 +27,7 @@ export default function App() {
   const imageData = useSelector(selectImageState);
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS theme={themeConfig}>
-      <div className="app-main bg-zinc-900 h-screen w-screen flex flex-col text-zinc-200 font-roboto overflow-hidden">
+      <div className="app-main bg-zinc-800 h-screen w-screen flex flex-col text-zinc-200 font-roboto overflow-hidden">
         <div className="app-header text-center mt-[50px]">
           <h2 className="text-2xl font-medium">Bengaluru City Police</h2>
           <h1 className="text-3xl font-semibold">
@@ -37,7 +37,7 @@ export default function App() {
         <div className="fileinput-container mt-[30px] px-[300px] py-[px]">
           <PictureDrop />
         </div>
-        <div className='mx-auto'>{imageData.returnData ? <AnalysisArea /> : <></>}</div>
+        {imageData.returnData ? <AnalysisArea /> : <></>}
       </div>
     </MantineProvider>
   );
