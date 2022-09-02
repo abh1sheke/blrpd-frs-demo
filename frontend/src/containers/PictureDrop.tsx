@@ -1,14 +1,17 @@
 import { FileInput } from "@mantine/core";
 import { IconUpload } from "@tabler/icons";
 import { FormEvent } from "react";
-import { selectImageState, setImageData, setReturnData } from "../store/sessionSlice";
+import {
+  selectImageState,
+  setImageData,
+} from "../store/sessionSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import axios from "axios";
 import FormButton from "../components/FormButton";
 
 export default function PictureDrop() {
-  const [img, setImg] = useState<Blob | string>('');
+  const [img, setImg] = useState<Blob | string>("");
   const imageData = useSelector(selectImageState);
   const dispatch = useDispatch();
   const handleChange = (file: File | null) => {
@@ -25,9 +28,12 @@ export default function PictureDrop() {
   };
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    dispatch(setImageData({ ...imageData, loading: true }));
     let formData = new FormData();
     formData.append("image", img);
     formData.append("filename", imageData?.filename as string);
+    formData.append("type", "file");
     axios
       .post("http://localhost:8000/api/post_image/", formData, {
         headers: {
@@ -35,13 +41,16 @@ export default function PictureDrop() {
         },
       })
       .then((res) => {
-        dispatch(setReturnData(res.data));
+        dispatch(setImageData({ ...imageData, returnData: res.data, loading: false }));
       })
-      .catch((err) => alert(err));
+      .catch((err) => {
+        alert(err);
+        dispatch(setImageData({ ...imageData, loading: false }));
+      });
+
   };
   return (
     <>
-    
       <form className="flex flex-col" onSubmit={(e) => handleSubmit(e)}>
         <FileInput
           className="my-5"

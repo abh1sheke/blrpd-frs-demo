@@ -8,36 +8,11 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
-function blobCreationFromURL(inputURI) {
-  var binaryVal;
-  var inputMIME = inputURI.split(",")[0].split(":")[1].split(";")[0];
-  if (inputURI.split(",")[0].indexOf("base64") >= 0)
-    binaryVal = atob(inputURI.split(",")[1]);
-  // Decoding of base64 encoded string
-  else binaryVal = unescape(inputURI.split(",")[1]);
-  var blobArray = [];
-  for (var index = 0; index < binaryVal.length; index++) {
-    blobArray.push(binaryVal.charCodeAt(index));
-  }
-  return new Blob([blobArray], {
-    type: inputMIME,
-  });
-}
-
-function blobToFile(blob, filename) {
-  blob.lastModifiedDate = new Date();
-  blob.name = filename;
-  return blob;
-}
 
 async function post_image(file, dispatch) {
-  const myFile = new File([file], file.filename, {
-    type: file.type,
-  });
-  console.log(myFile);
   let formData = new FormData();
   formData.append("image", file);
-  formData.append("filename", file.filename);
+  formData.append("filename", 'capture.jpeg');  
   axios
     .post("http://localhost:8000/api/post_image/", formData, {
       headers: {
@@ -46,7 +21,6 @@ async function post_image(file, dispatch) {
     })
     .then((res) => {
       dispatch(setReturnData(res.data));
-      console.log(res.data);
     })
     .catch((err) => alert(err));
 }
@@ -69,11 +43,11 @@ export default function WebcamTab() {
         blob: imageSrc,
         filename: "webcam_screenshot.jpeg",
         tab: "webcam",
+        loading: true,
       })
     );
-    let x = blobCreationFromURL(imageSrc, dispatch);
-    let file = blobToFile(x, imageData.filename);
-    post_image(file);
+    post_image(imageSrc, dispatch);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [webcamRef]);
   return (
     <>
@@ -87,7 +61,7 @@ export default function WebcamTab() {
               screenshotFormat="image/jpeg"
               width={1280}
               videoConstraints={videoConstraints}
-              className="rounded mt-3"
+              className="rounded mt-3 mb-2"
             />
             <button
               onClick={capture}
