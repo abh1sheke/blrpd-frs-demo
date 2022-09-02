@@ -31,6 +31,7 @@ export interface ImageData {
   blob?: string;
   filename?: string;
   tab: "upload" | "webcam";
+  loading: boolean;
 }
 
 export interface SessionState {
@@ -43,6 +44,7 @@ const initialState: SessionState = {
     blob: undefined,
     filename: undefined,
     tab: "upload",
+    loading: false,
   },
 };
 
