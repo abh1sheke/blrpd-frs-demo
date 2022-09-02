@@ -8,6 +8,7 @@ class FaceRecognition:
         self.filename = filename
         self.imagePath = imagePath
         self.image = Image.open(imagePath)
+        self.image = self.image.convert('RGB')
         self.detectBucket = detectBucket
         self.searchBucket = searchBucket
         self.tableName = tableName
