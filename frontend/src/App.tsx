@@ -8,7 +8,7 @@ import { colors } from "./colors";
 import { selectImageState } from "./store/sessionSlice";
 import { useSelector } from "react-redux";
 import AnalysisArea from "./containers/AnalysisArea";
-import Uplaodtabgroup from "./containers/UploadTabgroup.tsx";
+import Uplaodtabgroup from "./containers/UploadTabgroup";
 
 type CustomColors = keyof typeof colors;
 declare module "@mantine/core" {
