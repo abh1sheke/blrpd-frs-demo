@@ -32,8 +32,10 @@ export default function App() {
   const imageData = useSelector(selectImageState);
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS theme={themeConfig}>
-      <ScrollArea>
-        <div className="app-main bg-zinc-800 h-screen w-screen flex flex-col text-zinc-200 font-roboto">
+      <ScrollArea 
+      className='bg-zinc-800'
+      >
+        <div className="app-main h-screen w-screen flex flex-col text-zinc-200 font-roboto">
           <div className="app-header text-center mt-[10px]">
             <h2 className="text-2xl font-medium">Bengaluru City Police</h2>
             <h1 className="text-3xl font-semibold">
