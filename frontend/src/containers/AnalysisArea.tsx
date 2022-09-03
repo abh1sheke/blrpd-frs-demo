@@ -7,7 +7,6 @@ import { v4 as uuid } from "uuid";
 export default function AnalysisArea() {
   const imageData = useSelector(selectImageState);
   const matches = imageData.returnData?.matches;
-  console.log(matches);
   return (
     <>
       <div className="app-analysis mt-5 text-zinc-300 mx-auto w-[800px] rounded bg-zinc-900">
