@@ -1,14 +1,15 @@
 import {
   MantineProvider,
   MantineThemeOverride,
-  ScrollArea,
   Tuple,
+  Image,
 } from "@mantine/core";
 import { colors } from "./colors";
 import { selectImageState } from "./store/sessionSlice";
 import { useSelector } from "react-redux";
 import AnalysisArea from "./containers/AnalysisArea";
 import Uplaodtabgroup from "./containers/UploadTabgroup";
+import NavbarMain from "./containers/NavbarMain";
 
 type CustomColors = keyof typeof colors;
 declare module "@mantine/core" {
@@ -32,22 +33,31 @@ export default function App() {
   const imageData = useSelector(selectImageState);
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS theme={themeConfig}>
-      <ScrollArea 
-      className='bg-zinc-800'
-      >
-        <div className="app-main h-screen w-screen flex flex-col text-zinc-200 font-roboto">
-          <div className="app-header text-center mt-[10px]">
-            <h2 className="text-2xl font-medium">Bengaluru City Police</h2>
-            <h1 className="text-3xl font-semibold">
-              Facial Recognition System Demo
-            </h1>
-          </div>
-          <div className="fileinput-container mt-[30px] px-[300px] py-[px]">
+      <div className="overflow-x-hidden bg-neutral-900 h-screen w-screen">
+        <NavbarMain />
+        <div className="app-main flex flex-col text-zinc-200 font-roboto">
+          <div className="fileinput-container mt-[70px] w-[400px] sm:w-[500px] md:w-[650] mx-auto">
             <Uplaodtabgroup />
           </div>
-          {imageData.returnData ? <AnalysisArea /> : <></>}
+          <div>
+            {imageData.blob ? (
+                <Image
+                  src={imageData.blob}
+                  width={450}
+                  height={275}
+                  fit="cover"
+                  radius="sm"
+                  alt="upload.jpg"
+                  caption={`Source image - ${imageData.filename}`}
+                  className="shadow-md mx-auto my-5 mb-[60px]"
+                />
+            ) : (
+              ""
+            )}
+            {imageData.returnData ? <AnalysisArea /> : <></>}
+          </div>
         </div>
-      </ScrollArea>
+      </div>
     </MantineProvider>
   );
 }
