@@ -8,11 +8,24 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
+function WebcamButton({ capture }) {
+  const base =
+    "mx-auto px-6 py-2 font-roboto rounded transition-all drop-shadow-md flex items-center font-bold";
+  const enabled =
+    "text-zinc-300 bg-cgrey-900 hover:bg-cgrey-700 hover:ring-1 hover:ring-cgrey-700 cursor-pointer";
+  return (
+    <>
+      <button className={`${base} ${enabled}`} onClick={capture}>
+        Capture image
+      </button>
+    </>
+  );
+}
 
 async function post_image(file, dispatch) {
   let formData = new FormData();
   formData.append("image", file);
-  formData.append("filename", 'capture.jpeg');  
+  formData.append("filename", "capture.jpeg");
   axios
     .post("http://localhost:8000/api/post_image/", formData, {
       headers: {
@@ -63,12 +76,7 @@ export default function WebcamTab() {
               videoConstraints={videoConstraints}
               className="rounded mt-3 mb-2"
             />
-            <button
-              onClick={capture}
-              className="mx-auto px-6 py-2 font-roboto rounded transition-all drop-shadow-md text-zinc-300 bg-black hover:bg-zinc-700 hover:ring-1 hover:ring-zinc-800 cursor-pointer"
-            >
-              Capture Image
-            </button>
+            <WebcamButton capture={capture} />
           </div>
         </>
       ) : (

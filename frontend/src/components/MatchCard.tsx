@@ -11,13 +11,13 @@ export default function MatchCard({
 }) {
   return (
     <>
-      <div className="my-5 match-card flex bg-zinc-800 rounded p-3 drop-shadow-sm w-[400px] items-center mx-auto">
+      <div className="my-5 match-card flex bg-zinc-900 rounded p-3 drop-shadow-md w-[400px] items-center mx-auto">
         <Image
           src={`http://localhost:8000/media/images/${matchFile}`}
           width={75}
           height={75}
           fit="cover"
-          radius="md"
+          radius="sm"
         />
         <div className="flex flex-col ml-6 text-left text-zinc-300 font-light">
           <span className="text-2xl font-roboto">

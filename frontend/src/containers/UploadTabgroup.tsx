@@ -10,20 +10,45 @@ export default function UplaodTabgroup() {
   const imageData = useSelector(selectImageState);
   const dispatch = useDispatch();
   return (
-    <Tabs value={activeTab} onTabChange={setActiveTab}>
+    <Tabs value={activeTab} onTabChange={setActiveTab} color="gray"
+      styles={(theme) => ({
+        tabLabel: {
+          fontFamily: 'PT Sans',
+          fontWeight: 'bold'
+        },
+      })}
+    >
       <Tabs.List position="center">
         <Tabs.Tab
           value="upload"
           onClick={() =>
-            dispatch(setImageData({ ...imageData, tab: "upload" }))
+            dispatch(
+              setImageData({
+                ...imageData,
+                tab: "upload",
+                blob: undefined,
+                returnData: undefined,
+              })
+            )
           }
         >
           Upload Image
         </Tabs.Tab>
-        <Tabs.Tab value="webcam" 
+        <Tabs.Tab
+          value="webcam"
           onClick={() =>
-            dispatch(setImageData({ ...imageData, tab: "webcam" }))
-          }>Use Webcam</Tabs.Tab>
+            dispatch(
+              setImageData({
+                ...imageData,
+                tab: "webcam",
+                blob: undefined,
+                returnData: undefined,
+              })
+            )
+          }
+        >
+          Use Webcam
+        </Tabs.Tab>
       </Tabs.List>
 
       <Tabs.Panel value="upload">
