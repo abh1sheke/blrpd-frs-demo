@@ -7,6 +7,7 @@ import { v4 as uuid } from "uuid";
 export default function AnalysisArea() {
   const imageData = useSelector(selectImageState);
   const matches = imageData.returnData?.matches;
+  console.log(matches);
   return (
     <>
       <div className="app-analysis mt-5 text-zinc-300 mx-auto w-[800px] rounded bg-zinc-900">
@@ -35,7 +36,7 @@ export default function AnalysisArea() {
                 </>
               ) : (
                 matches?.map((obj) => {
-                  if (obj !== null) {
+                  if (obj !== null && !obj.Error) {
                     return (
                       <MatchCard
                         key={uuid()}
@@ -48,8 +49,8 @@ export default function AnalysisArea() {
                         matchFile={obj.MatchFile}
                       />
                     );
-                  }
-                  return <>No matches!</>;
+                  } else if (obj.Error) return null;
+                  else return <>No matches!</>;
                 })
               )}
             </div>

@@ -19,6 +19,7 @@ interface MatchData {
     Similarity: number;
   };
   MatchFile: string;
+  Error: string;
 }
 export interface ImageData {
   returnData?: {
