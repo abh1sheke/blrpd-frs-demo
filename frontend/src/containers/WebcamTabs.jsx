@@ -23,6 +23,8 @@ function WebcamButton({ capture }) {
 }
 
 async function post_image(file, dispatch) {
+  e.preventDefault();
+  dispatch(setImageData({ ...imageData, loading: true }));
   let formData = new FormData();
   formData.append("image", file);
   formData.append("filename", "capture.jpeg");
@@ -33,9 +35,12 @@ async function post_image(file, dispatch) {
       },
     })
     .then((res) => {
-      dispatch(setReturnData(res.data));
+      dispatch(setImageData({ ...imageData, returnData: res.data, loading: false }));
     })
-    .catch((err) => alert(err));
+    .catch((err) => {
+        alert(err);
+        dispatch(setImageData({ ...imageData, loading: false }));
+    });
 }
 
 const videoConstraints = {
